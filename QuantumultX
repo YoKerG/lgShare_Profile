@@ -92,10 +92,10 @@ url-latency-benchmark=🇬🇧 英国, server-tag-regex=(?=.*(英国|英國|UK|(
 url-latency-benchmark=🇩🇪 德国, server-tag-regex=(?=.*(德国|德國|DE|(?i)German)), check-interval=600, tolerance=100, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/DE.png
 url-latency-benchmark=🇮🇳 其他, server-tag-regex=(?=.*())^((?!(港|HK|(?i)Hong|台|TW|(?i)Taiwan|日|JP|(?i)Japan|KR|Korea|KOR|首尔|韩|韓|(?i)Korea|新加坡|狮城|SG|(?i)Singapore|德国|德國|DE|(?i)German|美国|美國|US|洛杉矶|西雅图|(?i)States|American|英国|英國|UK|(?i)Kingdom|(?i)套餐|剩余)).)*$, check-interval=600, tolerance=100, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/FR.png
 [server_remote]
-添加节点订阅&flag=Quantumult, tag=JiSu, update-interval=172800, opt-parser=true, enabled=true
-添加节点订阅&flag=Quantumult, tag=PQJC, update-interval=172800, opt-parser=true, enabled=true
-添加节点订阅#via=0, tag=FaMa, update-interval=172800, opt-parser=true, enabled=true
-添加节点订阅, tag=ChinaG, update-interval=864000, opt-parser=true, enabled=true
+添加节点订阅1&flag=Quantumult, tag=JiSu, update-interval=172800, opt-parser=true, enabled=true
+添加节点订阅2&flag=Quantumult, tag=PQJC, update-interval=172800, opt-parser=true, enabled=true
+添加节点订阅3#via=0, tag=FaMa, update-interval=172800, opt-parser=true, enabled=true
+添加节点订阅4, tag=ChinaG, update-interval=864000, opt-parser=true, enabled=true
 # https://warp.zhongliyiheng.workers.dev/sub/162.159.240.105, tag=CloudFlare, update-interval=864000, opt-parser=true, enabled=false
 # https://gist.githubusercontent.com/ddgksf2013/baacafc36c685a0af41e500d9a4773ab/raw/Netease.list, tag=网易云解锁, update-interval=864000, opt-parser=false, enabled=false
 [filter_remote]
