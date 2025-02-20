@@ -1,1 +1,184 @@
+[general]
+# 服务检查超时 (毫秒)
+server_check_timeout = 3000
+# 直连网络测试
+network_check_url = http://www.apple.com/library/test/success.html
+# 代理策略测试
+server_check_url=http://cp.cloudflare.com/generate_204
+# 配置文件图标
+profile_img_url = https://github.com/Centralmatrix3/Matrix-io/raw/master/Gallery/Special/Special003.png
+# IP位置检查
+geo_location_checker=http://ip-api.com/json/?lang=zh-CN, https://raw.githubusercontent.com/limbopro/QuantumultX/master/Scripts/IP_API.js
+# 资源解析器
+resource_parser_url=https://raw.githubusercontent.com/KOP-XIAO/QuantumultX/master/Scripts/resource-parser.js
+# 排除路线 (不经过圈X处理)
+excluded_routes = 239.255.255.250/32, 24.105.30.129/32, 185.60.112.157/32, 185.60.112.158/32, 182.162.132.1/32, 192.168.0.0/16, 172.16.0.0/12, 100.64.0.0/10, 10.0.0.0/8
+icmp_auto_reply = true
+# DNS排除列表 (不使用fake-ip方式,列表外全部采用fake-ip及远程解析的模式)
+dns_exclusion_list = *.lan, *.direct, *.cmpassport.com, *.jegotrip.com.cn, *.icitymobile.mobi, id6.me, *.pingan.com.cn, *.cmbchina.com
+# UDP回退策略：direct/reject/节点
+fallback_udp_policy = reject
+# 油管去广告
+udp_drop_list = 443
+# UDP 白名单，留空则默认所有为端口。不在udp白名单列表中的端口，将被丢弃处理（返回 ICMP  “端口不可达” 信息）
+# UDP Drop名单，同白名单类似，但不会返回 ICMP “端口不可达” 信息
+# drop 名单仅处理 whitelist名单中的端口
+# UDP丢弃列表
+;udp_whitelist = 1-442, 444-65535
+;udp_drop_list = 
+######################################
+######################################
+##链式代理##(静态住宅IP代理通过)
+#加后缀成链式代理(直连不通)需打开资源解析器
+#[policy]添加策略组
+;static=🏠 静态住宅, 🇭🇰 ip2w - HK, img-url=https://raw.githubusercontent.com/Semporia/Hand-Painted-icon/master/Universal/RoundRobin.png
+#[server_local]添加落地IP
+;socks5=185.155.234.91:2333, username=***, password=***, fast-open=true, udp-relay=true, tag=🇭🇰 ip2w - HK
+#[server_remote]资源路径后加上:#via=0
+##指定分流规则走链式代理
+#[filter_remote]分流规则后添加:#via=%TUN%; 分流策略偏好:🏠 静态住宅
+##指定规则网址走链式代理/代理通过落地IP
+//若通过策略组,策略组选择:落地IP(🏠 静态住宅)
+#[filter_local]规则网址后添加:策略组, via-interface=%TUN%
+;host-keyword, ipinfo, 策略组, via-interface=%TUN%
+#关键最后一步:代理通过落地IP
+;ip-cidr, 185.155.234.91/32, proxy
+######################################
+######################################
+[dns]
+# 禁用系统DNS/IPv6
+no-system
+no-ipv6
+# DNS over HTTP/3
+;prefer-doh3
+# 自定义 DNS 服务器
+server=8.8.8.8
+server=223.5.5.5
+server=119.29.29.29
+server=114.114.114.114
+# 自定义 DoH 服务器
+doh-server=https://dns.alidns.com/dns-query
+;doh-server=https://cloudflare-dns.com/dns-query
+#doh-server=https://dns.google/dns-query
+#doh-server=https://dns-family.adguard.com/dns-query
 
+[policy]
+static=🚀 节点选择, proxy, direct, 🏠 静态住宅, ⚡️ 倍率专用, ♻️ 自动选择, 🍴 故障切换, ⚖️ 负载均衡, 🇭🇰 香港, 🇨🇳 台湾, 🇸🇬 新加坡, 🇯🇵 日本, 🇰🇷 韩国, 🇺🇸 美国, 🇬🇧 英国, 🇩🇪 德国, 🇮🇳 其他, img-url=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/chxm1023/Quantumult_X_1.png
+static=🐠 漏网之鱼, 🚀 节点选择, proxy, direct, img-url=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Final.png
+static=🧚 My Emby, 🚀 节点选择, ⚡️ 倍率专用, proxy, direct, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/Emby.png
+static=🎶 Spotify, 🚀 节点选择, 🏠 静态住宅, 🇭🇰 香港, 🇨🇳 台湾, 🇯🇵 日本, proxy, img-url=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Spotify.png
+static=🎸 TikTok, 🚀 节点选择, 🏠 静态住宅, 🇺🇸 美国, 🇯🇵 日本, proxy, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/TikTok.png
+static=🤖 OpenAI, 🚀 节点选择, 🏠 静态住宅, 🇭🇰 香港, 🇨🇳 台湾, proxy, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/OpenAI.png
+static=🏠 静态住宅, 🇭🇰 ip2w - HK, 🇯🇵 ip2w - JP, 🇭🇰 cheap - HK, img-url=https://raw.githubusercontent.com/Semporia/Hand-Painted-icon/master/Universal/RoundRobin.png
+static=🌏 全球加速, 🚀 节点选择, 🏠 静态住宅, proxy, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/Global.png
+static=🎬 国际媒体, 🚀 节点选择, ⚡️ 倍率专用, 🏠 静态住宅, proxy, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/Streaming.png
+static=🥇 Amazon, proxy, direct, img-url=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/icon/qure/color/Amazon.png
+static=Ⓜ️ 微软服务, proxy, direct, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/Microsoft.png
+static=🍎 苹果服务, proxy, direct, img-url=https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/Apple-2.png
+static=🎧 Netease, proxy, direct, server-tag-regex= 网易云解锁, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/Netease.png
+static=🌐 国内直连, proxy, direct, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/China.png
+# 默认设置10分钟(600秒)测速一次，当前使用节点延迟和最新测速延迟最低的节点相差100ms以上则切换为最新的最低延迟节点，否则继续延用节点
+url-latency-benchmark=⚡️ 倍率专用, server-tag-regex=(?=.*(Emby|(?i)0.01x|0.1x|0.2x|x0.01|x0.1|x0.2|0.01|0.1|0.2))^((?!(5|6|10)).)*$, check-interval=60, tolerance=80, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/StreamingSE.png
+url-latency-benchmark=♻️ 自动选择, server-tag-regex=.*, check-interval=60, tolerance=100, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/Urltest.png
+available=🍴 故障切换, server-tag-regex=.*, check-interval=60, tolerance=100, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/Speedtest.png
+round-robin=⚖️ 负载均衡, server-tag-regex=.*, check-interval=60, tolerance=100, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/Telegram.png
+url-latency-benchmark=🇭🇰 香港, server-tag-regex=(?=.*(港|HK|(?i)Hong)), check-interval=60, tolerance=100, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/HK.png
+url-latency-benchmark=🇨🇳 台湾, server-tag-regex=(?=.*(台|TW|(?i)Taiwan)), check-interval=60, tolerance=100, alive-checking=false, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/TW.png
+url-latency-benchmark=🇸🇬 新加坡, server-tag-regex=(?=.*(新加坡|狮城|SG|(?i)Singapore)), check-interval=60, tolerance=100, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/SG.png
+url-latency-benchmark=🇯🇵 日本, server-tag-regex=(?=.*(日本|JP|(?i)Japan)), check-interval=60, tolerance=100, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/JP.png
+url-latency-benchmark=🇰🇷 韩国, server-tag-regex=(?=.*(KR|Korea|KOR|首尔|韩|韓|(?i)Korea)), check-interval=60, tolerance=100, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/KR.png
+url-latency-benchmark=🇺🇸 美国, server-tag-regex=(?=.*(美国|美國|US|洛杉矶|西雅图|(?i)States|American)), check-interval=60, tolerance=80, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/US.png
+url-latency-benchmark=🇬🇧 英国, server-tag-regex=(?=.*(英国|英國|UK|(?i)Kingdom)), check-interval=600, tolerance=100, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/UK.png
+url-latency-benchmark=🇩🇪 德国, server-tag-regex=(?=.*(德国|德國|DE|(?i)German)), check-interval=600, tolerance=100, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/DE.png
+url-latency-benchmark=🇮🇳 其他, server-tag-regex=(?=.*())^((?!(港|HK|(?i)Hong|台|TW|(?i)Taiwan|日|JP|(?i)Japan|KR|Korea|KOR|首尔|韩|韓|(?i)Korea|新加坡|狮城|SG|(?i)Singapore|德国|德國|DE|(?i)German|美国|美國|US|洛杉矶|西雅图|(?i)States|American|英国|英國|UK|(?i)Kingdom|(?i)套餐|剩余)).)*$, check-interval=600, tolerance=100, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/FR.png
+[server_remote]
+添加节点订阅&flag=Quantumult, tag=JiSu, update-interval=172800, opt-parser=true, enabled=true
+添加节点订阅&flag=Quantumult, tag=PQJC, update-interval=172800, opt-parser=true, enabled=true
+添加节点订阅#via=0, tag=FaMa, update-interval=172800, opt-parser=true, enabled=true
+添加节点订阅, tag=ChinaG, update-interval=864000, opt-parser=true, enabled=true
+# https://warp.zhongliyiheng.workers.dev/sub/162.159.240.105, tag=CloudFlare, update-interval=864000, opt-parser=true, enabled=false
+# https://gist.githubusercontent.com/ddgksf2013/baacafc36c685a0af41e500d9a4773ab/raw/Netease.list, tag=网易云解锁, update-interval=864000, opt-parser=false, enabled=false
+[filter_remote]
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/Direct/Direct.list, tag=🎯 规则修正, force-policy=direct, update-interval=864000, opt-parser=false, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/Privacy/Privacy.list, tag=🐻 隐私保护, force-policy=reject, update-interval=864000, opt-parser=false, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/Hijacking/Hijacking.list, tag=🔰 不良劫持, force-policy=reject, update-interval=864000, opt-parser=false, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rewrite/QuantumultX/BlockHTTPDNS/BlockHTTPDNS.list, tag=🛜 DNS拦截, force-policy=reject, update-interval=864000, opt-parser=false, enabled=true
+https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/QuantumultX/Ruleset/Advertising.list, tag=🚫 广告拦截, force-policy=reject, update-interval=864000, opt-parser=false, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/Amazon/Amazon.list, tag=🥇 Amazon, force-policy=🥇 Amazon, update-interval=864000, opt-parser=false, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/Microsoft/Microsoft.list, tag=Ⓜ️ 微软服务, force-policy=Ⓜ️ 微软服务, update-interval=864000, opt-parser=false, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/Apple/Apple.list, tag=🍎 苹果服务, force-policy=🍎 苹果服务, update-interval=864000, opt-parser=false, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/NetEaseMusic/NetEaseMusic.list, tag=🎧 NetEase, force-policy=🎧 Netease, update-interval=864000, opt-parser=false, enabled=true
+https://raw.githubusercontent.com/ddgksf2013/Filter/master/Emby.list, tag=🧚 My Emby, force-policy=🧚 My Emby, update-interval=864000, opt-parser=true, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/TikTok/TikTok.list#via=%TUN%, tag=🎸 TikTok, force-policy=🎸 TikTok, update-interval=864000, opt-parser=false, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/Spotify/Spotify.list#via=%TUN%, tag=🎶 Spotify, force-policy=🎶 Spotify, update-interval=864000, opt-parser=false, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/OpenAI/OpenAI.list#via=%TUN%, tag=🤖 OpenAI, force-policy=🤖 OpenAI, update-interval=864000, opt-parser=false, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/GlobalMedia/GlobalMedia.list#via=%TUN%, tag=🎬 国际媒体, force-policy=🎬 国际媒体, update-interval=864000, opt-parser=false, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/Global/Global.list#via=%TUN%, tag=🌏 全球加速, force-policy=🌏 全球加速, update-interval=864000, opt-parser=false, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/Lan/Lan.list, tag=🌐 局域网络, force-policy=🌐 国内直连, update-interval=864000, opt-parser=false, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/ChinaMax/ChinaMax.list, tag=🌐 国内直连, force-policy=🌐 国内直连, update-interval=864000, opt-parser=false, enabled=true
+[rewrite_remote]
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rewrite/QuantumultX/SafeRedirect/SafeRedirect.conf, tag=安全重定向, update-interval=864000, opt-parser=false, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rewrite/QuantumultX/BlockHTTPDNS/BlockHTTPDNS.conf, tag=DNS重拦截, update-interval=864000, opt-parser=false, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rewrite/QuantumultX/AdvertisingLite/AdvertisingLite.conf, tag=精细去广告, update-interval=864000, opt-parser=false, enabled=true
+https://limbopro.com/Adblock4limbo.conf, tag=毒奶去网页, update-interval=864000, opt-parser=false, enabled=true
+https://raw.githubusercontent.com/fmz200/wool_scripts/main/QuantumultX/rewrite/cleanup.snippet, tag=小程序净化, update-interval=864000, opt-parser=false, enabled=true
+https://raw.githubusercontent.com/ddgksf2013/Rewrite/master/AdBlock/YoutubeAds.conf, tag=墨鱼去油管, update-interval=864000, opt-parser=false, enabled=true
+https://raw.githubusercontent.com/ddgksf2013/Rewrite/master/AdBlock/StartUp.conf, tag=墨鱼去开屏, update-interval=864000, opt-parser=false, enabled=true
+https://github.com/ddgksf2013/dev/raw/master/ForOwnUse.conf, tag=墨鱼解锁VIP集, update-interval=864000, opt-parser=false, enabled=true
+https://whatshub.top/rewrite/grammarly.conf, tag=Grammarly解锁, update-interval=864000, opt-parser=false, enabled=true
+https://qxnav.com/rules/QuantumultX/gz/qxrules.conf, tag=奇心脚本解锁, update-interval=864000, opt-parser=true, enabled=false
+https://raw.githubusercontent.com/zwf234/rules/master/TikTok/US.conf, tag=奇心TikTok(旧), update-interval=864000, opt-parser=false, enabled=false
+https://raw.githubusercontent.com/Peng-YM/Sub-Store/master/config/QX.snippet, tag=Sub-Store, update-interval=864000, opt-parser=false, enabled=false
+https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/modules/script-hub.qx.conf, tag=script-hub, update-interval=864000, opt-parser=false, enabled=false
+https://raw.githubusercontent.com/chavyleung/scripts/master/box/rewrite/boxjs.rewrite.quanx.tf.conf, tag=Boxjs, update-interval=864000, opt-parser=false, enabled=false
+https://raw.githubusercontent.com/w37fhy/QuantumultX/master/QuantumultX_Cookie.conf, tag=获取Cookie, update-interval=864000, opt-parser=false, enabled=false
+[server_local]
+socks5=185.155.234.91:2333, username=hub111, password=hub111, fast-open=true, udp-relay=true, tag=🇭🇰 ip2w - HK
+socks5=154.86.109.155:2333, username=hub111, password=hub111, fast-open=true, udp-relay=true, tag=🇯🇵 ip2w - JP
+socks5=109.203.165.120:44999, username=lJjSLiCZSwBXBst, password=D5bwvWJxwhHl5cC, fast-open=true, udp-relay=true, tag=🇭🇰 cheap - HK
+[filter_local]
+# Emby Paul / Infuse Trakt
+host-suffix, kr.imetyou.top, 🧚 My Emby
+host-suffix, api.trakt.tv, 🧚 My Emby
+host-suffix, makima.online, 🧚 My Emby
+# IP/DNS一致
+host-suffix, ip-api.com, 🚀 节点选择, via-interface=%TUN%
+# DNS Leak
+host-suffix, ipleak.net, 🚀 节点选择, via-interface=%TUN%
+host-suffix, dnsleaktest.com, 🚀 节点选择, via-interface=%TUN%
+# 代理通过落地IP
+ip-cidr, 185.155.234.91/32, proxy
+ip-cidr, 154.86.109.155/32, proxy
+ip-cidr, 109.203.165.120/32, proxy
+# 代理通过(直连不通)
+;final, 🐠 漏网之鱼, via-interface=%TUN%
+# 兜底流量
+;geoip, cn, direct, no-resolve
+final, 🐠 漏网之鱼
+[rewrite_local]
+[task_local]
+# 媒体解锁查询
+event-interaction https://raw.githubusercontent.com/KOP-XIAO/QuantumultX/master/Scripts/streaming-ui-check.js, tag=媒体解锁查询, img-url=play.circle.system, enabled=true
+# 谷歌送中查询
+event-interaction https://raw.githubusercontent.com/KOP-XIAO/QuantumultX/master/Scripts/switch-check-google.js, tag=谷歌送中查询, img-url=drop.circle.system, enabled=true
+# 策略流量查询
+event-interaction https://raw.githubusercontent.com/KOP-XIAO/QuantumultX/master/Scripts/traffic-check.js, tag=策略流量查询, img-url=arrow.up.arrow.down.circle.system, enabled=true
+# 节点信息查询
+event-interaction https://raw.githubusercontent.com/KOP-XIAO/QuantumultX/master/Scripts/server-info-plus.js, tag=节点信息查询, img-url=tag.circle.system, enabled=true
+# 网络信息查询
+event-interaction https://raw.githubusercontent.com/xream/scripts/main/surge/modules/network-info/net-lsp-x.js, tag=网络信息查询, img-url=link.circle.system, enabled=true
+1 0 * * * https://raw.githubusercontent.com/chavyleung/scripts/master/zxhc/zxhc.js, tag=智行火车, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/zxhc.png, enabled=true
+1 0 * * * https://raw.githubusercontent.com/chavyleung/scripts/master/neteasemusic/quanx/neteasemusic.js, tag=网易云音乐, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/neteasemusic.png, enabled=true
+[http_backend]
+https://raw.githubusercontent.com/chavyleung/scripts/master/chavy.box.js, tag=boxjs, path=^/, enabled=true
+[mitm]
+# 跳过验证证书
+skip_validating_cert = false
+# 强制嗅探域名
+force_sni_domain_name = false
+# 当使用 Quantumult X 在 M 芯片的 Mac 设备上作为局域网网关时，使用下面的参数来 跳过某些特定设备的 mitm 需求
+;skip_src_ip = 192.168.4.0, 92.168.4.51
+# 当多个不同的 TCP 连接（非域名类请求）的目标 IP 不同，但这些连接的 TSL 握手 SNI 字段相同时，如需跳过其中某些连接的 MitM hostname 匹配过程，可使用👇参数。
+;skip_dst_ip = 123.44.55.4
+passphrase = F858C06D
+p12 = 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
