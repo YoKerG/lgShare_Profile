@@ -96,7 +96,7 @@ url-latency-benchmark=🇮🇳 其他, server-tag-regex=(?=.*())^((?!(港|HK|(?i
 添加节点订阅2&flag=Quantumult, tag=PQJC, update-interval=172800, opt-parser=true, enabled=true
 添加节点订阅3#via=0, tag=FaMa, update-interval=172800, opt-parser=true, enabled=true
 添加节点订阅4, tag=ChinaG, update-interval=864000, opt-parser=true, enabled=true
-# https://warp.zhongliyiheng.workers.dev/sub/162.159.240.105, tag=CloudFlare, update-interval=864000, opt-parser=true, enabled=false
+https://warp.zhongliyiheng.workers.dev/sub/162.159.240.105, tag=CloudFlare, update-interval=864000, opt-parser=true, enabled=false
 # https://gist.githubusercontent.com/ddgksf2013/baacafc36c685a0af41e500d9a4773ab/raw/Netease.list, tag=网易云解锁, update-interval=864000, opt-parser=false, enabled=false
 [filter_remote]
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/Direct/Direct.list, tag=🎯 规则修正, force-policy=direct, update-interval=864000, opt-parser=false, enabled=true
